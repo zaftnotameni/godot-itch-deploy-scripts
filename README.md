@@ -1,5 +1,8 @@
 # Godot Deployment Scripts
 
+**What this does?**
+One script export (windows + linux + web) and deploy (via butler) to itch.io.
+
 ## How to Use
 
 ### One Time Setup
@@ -57,6 +60,8 @@ project_root
 ```
 
 ## Export and Deployment
+
+Must be run from the root of your project.
 
 ```ps
 bat\export-and-itch-all.bat
