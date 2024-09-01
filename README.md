@@ -7,8 +7,8 @@ One script export (windows + linux + web) and deploy (via butler) to itch.io.
 
 ### One Time Setup
 
-- Have the `bat/` folder from this repository as a sibling from `project.godot`.
-- Create the `exports/lin`, `exports/win` and `exports/web` folders as a sibling from `project.godot`.
+- Have the contents of this repository inside a `bat/` folder as a sibling from `project\project.godot`.
+- Create the `exports/lin`, `exports/win` and `exports/web` folders as a sibling from `project\project.godot`.
 
 Configure your project exports for windows/linux/web normally.
 Make sure to use the default names for all three:
@@ -23,19 +23,20 @@ Make sure they are set to export to (export once or use the field at the top of 
 - windows: `exports\win` (i.e.: `your_game.exe` inside this folder)
 - linux: `exports\lin` (i.e.: `your_game` inside this folder)
 
-Make sure you have 2 things in your `PATH`:
+Configuration
 
-- `butler.exe`
-  - [https://itch.io/docs/butler/installing.html](https://itch.io/docs/butler/installing.html)
-  - [https://itch.io/docs/butler/login.html](https://itch.io/docs/butler/login.html)
-- `Godot_v4.3-rc3_win64_console.exe`
-  - [https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_win64.exe.zip](https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_win64.exe.zip)
+Inside `setup.bat` configure your godot binary, butler binary and itch username and project.
 
-Update your itch settings (replace YOUR_ITCH_USERNAME and YOUR_ITCH_URL) in:
+Here's an example:
 
-- `bat\itch.web.bat`
-- `bat\itch.win.bat`
-- `bat\itch.lin.bat`
+
+```bat
+:: setup.bat
+set GODOT_BINARY=Godot_v4.3-stable_win64_console.exe
+set BUTLER_BINARY=butler.exe
+set ITCH_USERNAME=zafteer
+set ITCH_PROJECT=sink
+```
 
 Recommended:
 
@@ -45,8 +46,9 @@ Recommended:
 It should look like this:
 
 ```
-project_root
-  - project.godot
+root
+  - project
+    - project.godot
   - bat
     ... bat files in this repository ...
   - exports
@@ -61,7 +63,7 @@ project_root
 
 ## Export and Deployment
 
-Must be run from the root of your project.
+Must be run from the root folder.
 
 ```ps
 bat\export-and-itch-all.bat
@@ -78,3 +80,11 @@ There are also individual commands for each part:
 - `bat\itch-web.bat`: deploy for web on itch using butler (requires export first)
 - `bat\itch-win.bat`: deploy for linux on itch using butler (requires export first)
 - `bat\itch-lin.bat`: deploy for windows on itch using butler (requires export first)
+
+## Advanced usage
+
+As you start your project, include the deploy scripts as a submodule:
+
+```bat
+git submodule add -f git@github.com:zaftnotameni/godot-itch-deploy-scripts.git bat
+```
